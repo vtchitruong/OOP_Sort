@@ -42,6 +42,23 @@ public:
     virtual void Sort(int *aa, int n);
 };
 
+//----------------------------------------
+void SelectionSort::Sort(int *aa, int n)
+{
+    SortBase::Sort(aa, n);
+    
+    int k;
+    for (int i = 0; i < n - 1; ++i)
+    {
+        k = i;
+        for (int j = i + 1; j < n; ++j)
+        {
+            if (a[j] < a[k]) k = j;
+            if (k != j) swap(i, k);
+        }
+    }
+}
+
 int main()
 {
 
