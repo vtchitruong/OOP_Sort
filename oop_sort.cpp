@@ -1,5 +1,6 @@
 #include <iostream>
 #include <time.h>
+#include <chrono>
 
 using namespace std;
 
@@ -146,7 +147,7 @@ void HeapSort::Sort(int *aa, int n)
 
 int main()
 {
-    int n = 10000;
+    int n = 50000;
     int *arr;
     arr = (int*) malloc((n+1) * sizeof(int));
 
@@ -164,11 +165,18 @@ int main()
     {
         for (int i = 0; i < n; ++i)
         {
-            arr[i] = rand() % 10000 + 1;
+            arr[i] = rand() % 50000 + 1;
         }
 
-        
+        auto start = std::chrono::system_clock::now();
         sb[k]->Sort(arr, n);
+        auto end = std::chrono::system_clock::now();
+
+         std::chrono::duration<double> elapsed_seconds = end-start;
+        std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+
+        std::cout << "finished computation at " << std::ctime(&end_time)
+              << "elapsed time: " << elapsed_seconds.count() << "s\n";
     }
 
     return 0;
